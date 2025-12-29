@@ -9,11 +9,14 @@ exit_script() {
 trap exit_script SIGINT
 
 while true; do
-    clear
+    #clear
     read -p "Nix PKGs: " input
 
     if [ -z "$input" ]; then
-        exit_script
+        #exit_script
+        clear
+        exec zsh
+        break
     fi
 
     read -ra pkgs <<< "$input"
@@ -34,8 +37,7 @@ while true; do
             echo "  - $p"
         done
         echo "---------------------------------------"
-        echo "Press any key to try again..."
-        read -n 1
+        #read -n 1
         continue
     fi
     echo "Entering nix-shell"
