@@ -189,8 +189,8 @@ hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.layout("orientationcycle right left"))
 
 -- Fullscreen
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode="maximized"}))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + minus", hl.dsp.workspace.toggle_special("magic"))
