@@ -6,20 +6,6 @@
 
 require("monitors")
 
--- hl.monitor({
---     output   = "eDP-1",
---     mode     = "1920x1080@60",
---     position = "0x0",
---     scale    = 1,
--- })
-
--- hl.monitor({
---     output   = "HDMI-A-1",
---     mode     = "preferred",
---     position = "auto",
---     scale    = 1,
--- })
-
 local terminal = "kitty"
 local fileManager = "dolphin"
 local menu = "wofi --show drun"
@@ -140,6 +126,7 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle calendar"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("noctalia msg wallpaper-next"))
+hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 
 -- Move focus with mainMod + vim keys
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
