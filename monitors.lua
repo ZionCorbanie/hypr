@@ -2,7 +2,7 @@
 
 hl.monitor({
   output = "desc:BOE 0x09F1",
-  mode = "1920x1080@60.031",
+  mode = "1920x1080@60.03",
   position = "0x0",
   scale = 1,
   cm = "srgb",
