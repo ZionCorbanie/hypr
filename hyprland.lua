@@ -41,7 +41,8 @@ hl.config({
         allow_tearing = false,
         layout = "master",
         col = {
-            active_border = "rgba(30a5ffff)",
+            -- active_border = "rgba(30a5ffff)",
+            active_border = { colors = { "rgba(40ffffff)", "rgba(30a5ffff)" }, angle=45},
             inactive_border = "rgba(59595900)",
         },
     },
@@ -58,7 +59,7 @@ hl.config({
         },
         blur = {
             enabled = false,
-            size = 3,
+            size = 1,
             passes = 1,
             vibrancy = 0.1696,
         },
