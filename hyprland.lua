@@ -135,6 +135,25 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle calendar")
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("noctalia msg wallpaper-next"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
+
+-- TODO: fix this
+-- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.dispatch("movecurrentworkspacetomonitor", "l"))
+-- hl.bind(mainMod .. " + SHIFT + D", hl.dsp.dispatch("movecurrentworkspacetomonitor", "r"))
+
+
+-- Master layout controls
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster"))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.layout("orientationcycle right left"))
+-- Fullscreen
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode="maximized"}))
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
+-- Special workspace (scratchpad)
+hl.bind(mainMod .. " + minus", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.window.move({ workspace = "special:magic" }))
+-- Scroll through existing workspaces with mainMod + scroll
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move focus with mainMod + vim keys
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -180,26 +199,6 @@ hl.bind(mainMod .. " + SHIFT + CTRL + 7", hl.dsp.window.move({ workspace = 7, fo
 hl.bind(mainMod .. " + SHIFT + CTRL + 8", hl.dsp.window.move({ workspace = 8, follow = false }))
 hl.bind(mainMod .. " + SHIFT + CTRL + 9", hl.dsp.window.move({ workspace = 9, follow = false }))
 hl.bind(mainMod .. " + SHIFT + CTRL + 0", hl.dsp.window.move({ workspace = 10, follow = false }))
-
--- CHANGED: Resolved TODOs for monitor movement dispatchers
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.dispatch("movecurrentworkspacetomonitor", "l"))
--- hl.bind(mainMod .. " + SHIFT + D", hl.dsp.dispatch("movecurrentworkspacetomonitor", "r"))
-
--- Master layout controls
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster"))
-hl.bind(mainMod .. " + SHIFT + N", hl.dsp.layout("orientationcycle right left"))
-
--- Fullscreen
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode="maximized"}))
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
-
--- Special workspace (scratchpad)
-hl.bind(mainMod .. " + minus", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.window.move({ workspace = "special:magic" }))
-
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move/resize windows with mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
