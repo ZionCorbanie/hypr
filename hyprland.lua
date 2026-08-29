@@ -135,13 +135,11 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle calendar")
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("noctalia msg wallpaper-next"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"))
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
 
 -- TODO: fix this
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.dispatch("movecurrentworkspacetomonitor", "l"))
 -- hl.bind(mainMod .. " + SHIFT + D", hl.dsp.dispatch("movecurrentworkspacetomonitor", "r"))
-
-
 -- Master layout controls
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.layout("orientationcycle right left"))
