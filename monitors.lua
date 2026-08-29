@@ -2,8 +2,18 @@
 
 hl.monitor({
   output = "desc:BOE 0x09F1",
-  mode = "1920x1080@60.03",
+  mode = "1920x1080@60.031",
   position = "0x0",
+  scale = 1,
+  cm = "srgb",
+  sdr_min_luminance = 0.2,
+  sdr_max_luminance = 80,
+})
+
+hl.monitor({
+  output = "desc:LG Electronics LG ULTRAWIDE 0x00055D59",
+  mode = "2560x1080@60",
+  position = "1920x0",
   scale = 1,
   cm = "srgb",
   sdr_min_luminance = 0.2,

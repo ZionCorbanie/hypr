@@ -60,9 +60,17 @@ hl.config({
         orientation = "left",
         mfact = 0.5,
     },
+    scrolling = {
+        direction = "right",
+        -- wrap_focus = true,
+        -- column_width = 1.0,
+        -- explicit_column_widths = "1.0",
+    },
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
+        mouse_move_enables_dpms = true,
+        key_press_enables_dpms = true,
     },
 
     --############
@@ -133,6 +141,9 @@ hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.layout("swapcol l"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
 
 -- Switch workspaces with mainMod + [0-9]
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
