@@ -137,9 +137,8 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("noctalia msg wallpaper-next"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
 
--- TODO: fix this
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.dispatch("movecurrentworkspacetomonitor", "l"))
--- hl.bind(mainMod .. " + SHIFT + D", hl.dsp.dispatch("movecurrentworkspacetomonitor", "r"))
+-- Move workspace to monitor
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.move({ monitor="+1" }))
 -- Master layout controls
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.layout("orientationcycle right left"))
@@ -158,9 +157,6 @@ hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
-
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.layout("swapcol l"))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
 
 -- Switch workspaces with mainMod + [0-9]
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
