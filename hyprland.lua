@@ -13,14 +13,20 @@ local menu = "wofi --show drun"
 hl.env("XCURSOR_SIZE", 24)
 hl.env("HYPRCURSOR_SIZE", 24)
 hl.env("HYPRCURSOR_THEME", "rose-pine-hyprcursor")
-hl.env("WLR_DRM_NO_ATOMIC", 1)
-hl.env("WLR_NO_HARDWARE_CURSORS", 1)
+
+-- Pin AMD iGPU (PCI:6:0:0) as primary compositor GPU, NVIDIA (PCI:1:0:0) secondary
+--hl.env("AQ_DRM_DEVICES", "/dev/dri/by-path/pci-0000:06:00.0-card:/dev/dri/by-path/pci-0000:01:00.0-card")
+hl.env("AQ_DRM_DEVICES", "/dev/dri/amd-igpu:/dev/dri/nvidia-dgpu")
 
 --####################
 --## LOOK AND FEEL ###
 --####################
 
 hl.config({
+    cursor = {
+        no_hardware_cursors = true,
+    },
+
     general = {
         gaps_in = 4,
         gaps_out = 8,
@@ -135,7 +141,7 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle calendar")
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("noctalia msg wallpaper-next"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
+-- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
 
 -- Move workspace to monitor
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.move({ monitor="+1" }))
@@ -249,7 +255,6 @@ hl.window_rule({
 
 hl.bind("code:107", hl.dsp.exec_cmd("QT_QPA_PLATFORM=wayland flameshot gui"))
 
--- CHANGED: Consolidated Qalculate (calculator) rules
 hl.window_rule({
     name = "qalculate_popup",
     match = { class = "^(qalculate-gtk)$" },
@@ -271,6 +276,15 @@ hl.window_rule({
     center = true,
     stay_focused = true,
     workspace = "special:nix-popup",
+})
+
+hl.window_rule({
+    name = "center-popups",
+    match = {
+        modal = true,
+    },
+    float = true,
+    center = true,
 })
 
 hl.bind(mainMod .. " + SHIFT + code:157", hl.dsp.window.move({ workspace = "special:nix-popup" }))
@@ -304,5 +318,5 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("~/code/emoji/emojipick.py"))
 hl.on("hyprland.start", function()
     hl.exec_cmd("firefox")
     hl.exec_cmd("noctalia")
-    hl.exec("moniqued")
+    hl.exec_cmd("moniqued")
 end)
