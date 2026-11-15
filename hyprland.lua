@@ -253,10 +253,6 @@ hl.window_rule({
     fullscreen_state = "0 0",
 })
 
--- hl.bind("code:107", hl.dsp.exec_cmd("QT_QPA_PLATFORM=wayland flameshot gui"))
-hl.bind("code:107", hl.plugin.hyprcapture.open)
-hl.bind("SHIFT + code:107", hl.plugin.hyprcapture.open_editor)
-
 hl.window_rule({
     name = "qalculate_popup",
     match = { class = "^(qalculate-gtk)$" },
@@ -323,3 +319,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("moniqued")
     hl.exec_cmd("hyprctl plugin load /run/current-system/sw/lib/libhyprcapture.so")
 end)
+
+-- hl.bind("code:107", hl.plugin.hyprcapture.open)
+hl.bind("code:107", hl.plugin.hyprcapture.open_editor)
