@@ -254,8 +254,8 @@ hl.window_rule({
 })
 
 -- hl.bind("code:107", hl.dsp.exec_cmd("QT_QPA_PLATFORM=wayland flameshot gui"))
--- hl.bind("code:107", hl.plugin.hyprcapture.open)
--- hl.bind("SHIFT + code:107", hl.plugin.hyprcapture.open_editor)
+hl.bind("code:107", hl.plugin.hyprcapture.open)
+hl.bind("SHIFT + code:107", hl.plugin.hyprcapture.open_editor)
 
 hl.window_rule({
     name = "qalculate_popup",
@@ -319,7 +319,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("~/code/emoji/emojipick.py"))
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia")
-    -- hl.exec_cmd("hyprctl plugin load /run/current-system/sw/lib/libhyprcapture.so")
     hl.exec_cmd("firefox")
     hl.exec_cmd("moniqued")
+    hl.exec_cmd("hyprctl plugin load /run/current-system/sw/lib/libhyprcapture.so")
 end)
