@@ -10,6 +10,16 @@ hl.monitor({
   sdr_max_luminance = 80,
 })
 
+hl.monitor({
+  output = "desc:LG Electronics LG ULTRAWIDE 0x00055D59",
+  mode = "2560x1080@60",
+  position = "1920x0",
+  scale = 1,
+  cm = "srgb",
+  sdr_min_luminance = 0.2,
+  sdr_max_luminance = 80,
+})
+
 hl.config({
   cursor = { default_monitor = "desc:BOE 0x09F1" },
 })
