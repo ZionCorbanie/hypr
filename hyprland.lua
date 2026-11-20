@@ -33,7 +33,7 @@ hl.config({
         border_size = 2,
         resize_on_border = false,
         allow_tearing = false,
-        layout = "master",
+        layout = "scrolling",
         col = {
             -- active_border = "rgba(30a5ffff)",
             active_border = { colors = { "rgba(40ffffff)", "rgba(30a5ffff)" }, angle=45},
@@ -61,16 +61,13 @@ hl.config({
     animations = {
         enabled = true,
     },
-    master = {
-        new_on_top = false,
-        orientation = "left",
-        mfact = 0.5,
-    },
     scrolling = {
         direction = "right",
+        column_width = 0.5,
+        -- ALT + R cycles a column through these widths: 33% -> 50% -> 100%
+        explicit_column_widths = "0.333, 0.5, 1.0",
         -- wrap_focus = true,
-        -- column_width = 1.0,
-        -- explicit_column_widths = "1.0",
+        -- wrap_swapcol = true,
     },
     misc = {
         force_default_wallpaper = 0,
@@ -145,9 +142,26 @@ hl.bind("SUPER + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 
 -- Move workspace to monitor
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.move({ monitor="+1" }))
--- Master layout controls
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster"))
-hl.bind(mainMod .. " + SHIFT + N", hl.dsp.layout("orientationcycle right left"))
+
+-- Scrolling layout controls
+-- Focus: left/right moves between columns (and scrolls the tape), up/down moves within a stacked column
+hl.bind(mainMod .. " + H", hl.dsp.layout("focus l"))
+hl.bind(mainMod .. " + L", hl.dsp.layout("focus r"))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+-- Move the current column left/right/up/down
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.layout("swapcol l"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("swapcol r"))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
+
+-- Stack / unstack: merge window into neighbouring column, or pull it back out into its own column
+hl.bind(mainMod .. " + bracketleft", hl.dsp.layout("consume_or_expel prev"))
+hl.bind(mainMod .. " + bracketright", hl.dsp.layout("consume_or_expel next"))
+
+-- Cycle the width of ALL columns on the workspace: 33% -> 50% -> 100%
+hl.bind(mainMod .. " + R", hl.dsp.layout("colresize +conf"))
+
 -- Fullscreen
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode="maximized"}))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
@@ -157,12 +171,6 @@ hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.window.move({ workspace = "special
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
-
--- Move focus with mainMod + vim keys
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
@@ -237,20 +245,6 @@ hl.window_rule({
     match = { tag = "contr" },
     float = true,
     move = "100%-w-50 10%",
-})
-
--- CHANGED: Consolidated 8 broken Flameshot window rules into a single rule
-hl.window_rule({
-    name = "flameshot_overlay",
-    match = { class = "^(flameshot)$" },
-    no_anim = true,
-    float = true,
-    move = "0 0",
-    pin = true,
-    stay_focused = true,
-    border_size = 0,
-    rounding = 0,
-    fullscreen_state = "0 0",
 })
 
 hl.window_rule({
